@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>dojo request</title>
+</head>
+<body>
+<div id="result"></div>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+<script type="text/javascript">
+  var endpoint = 'https://jsonplaceholder.typicode.com/posts/1';
+  require(["dojo/request"], function(request){
+    request.get(endpoint, {
+      handleAs: "json",
+      headers: {
+       "X-Requested-With": "" // request sends this header by default which causes pre-flight for even simple requests.  this will avoid that.
+        }
+    }).then(function(data){
+       document.getElementById('result').innerHTML = 'Bam.  Success!';
+    }, function(err){
+       document.getElementById('result').innerHTML = 'Worked about as well as Man U defending a 2 goal lead. </br> ' + err.message;
+    }, function(evt){
+    });
+  });
+</script>
+</body>
+</html>
